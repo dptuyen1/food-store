@@ -1,0 +1,37 @@
+.header {
+    background-color: var(--secondary);
+}
+
+.wrapper {
+    padding: 30px 15px;
+}
+
+.user-options,
+.search-box {
+    background-color: var(--white-color);
+    box-shadow: var(--box-shadow);
+}
+
+.user-options {
+    padding: 10px 20px;
+}
+
+.options-btn {
+    text-decoration: none;
+    display: block;
+    padding: 8px 0;
+    color: var(--text-color);
+
+    &:hover {
+        color: var(--primary);
+    }
+}
+
+.search-box {
+    padding: 16px;
+}
+
+.avatar {
+    width: 20px;
+    border-radius: 999px;
+}

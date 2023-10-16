@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="baseLayout"
+                template="/WEB-INF/layout/base.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header"
+                       value="/WEB-INF/layout/header.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer"
+                       value="/WEB-INF/layout/footer.jsp" />
+    </definition>
+    <definition name="index" extends="baseLayout">
+        <put-attribute name="title" value="Trang chủ" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/index.jsp" />
+    </definition>
+    <definition name="category" extends="baseLayout">
+        <put-attribute name="title" value="Danh mục" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/category/index.jsp" />
+    </definition>
+    <definition name="category-details" extends="baseLayout">
+        <put-attribute name="title" value="Tùy chỉnh danh mục" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/category/details.jsp" />
+    </definition>
+    <definition name="product" extends="baseLayout">
+        <put-attribute name="title" value="Sản phẩm" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/product/index.jsp" />
+    </definition>
+    <definition name="product-details" extends="baseLayout">
+        <put-attribute name="title" value="Tùy chỉnh sản phẩm" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/product/details.jsp" />
+    </definition>
+    <definition name="user" extends="baseLayout">
+        <put-attribute name="title" value="Người dùng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/user/index.jsp" />
+    </definition>
+    <definition name="user-details" extends="baseLayout">
+        <put-attribute name="title" value="Tùy chỉnh người dùng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/user/details.jsp" />
+    </definition>
+    <definition name="login" extends="baseLayout">
+        <put-attribute name="title" value="Đăng nhập" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/user/login.jsp" />
+    </definition>
+    <definition name="payment" extends="baseLayout">
+        <put-attribute name="title" value="Phương thức thanh toán" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/payment/index.jsp" />
+    </definition>
+    <definition name="payment-details" extends="baseLayout">
+        <put-attribute name="title" value="Tùy chỉnh phương thức thanh toán" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/payment/details.jsp" />
+    </definition>
+    <definition name="coupon" extends="baseLayout">
+        <put-attribute name="title" value="Ưu đãi khách hàng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/coupon/index.jsp" />
+    </definition>
+    <definition name="coupon-details" extends="baseLayout">
+        <put-attribute name="title" value="Tùy chỉnh ưu đãi khách hàng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/coupon/details.jsp" />
+    </definition>
+    <definition name="role" extends="baseLayout">
+        <put-attribute name="title" value="Quyền người dùng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/role/index.jsp" />
+    </definition>
+    <definition name="role-details" extends="baseLayout">
+        <put-attribute name="title" value="Tùy chỉnh quyền người dùng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/role/details.jsp" />
+    </definition>
+    <definition name="shopping" extends="baseLayout">
+        <put-attribute name="title" value="Phương thức phục vụ" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/shopping/index.jsp" />
+    </definition>
+    <definition name="shopping-details" extends="baseLayout">
+        <put-attribute name="title" value="Tùy chỉnh phương thức phục vụ" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/shopping/details.jsp" />
+    </definition>
+    <definition name="status" extends="baseLayout">
+        <put-attribute name="title" value="Trạng thái đơn hàng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/status/index.jsp" />
+    </definition>
+    <definition name="status-details" extends="baseLayout">
+        <put-attribute name="title" value="Tùy chỉnh trạng thái đơn hàng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/status/details.jsp" />
+    </definition>
+    <definition name="pos" extends="baseLayout">
+        <put-attribute name="title" value="Tùy chỉnh trạng thái đơn hàng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/pos.jsp" />
+    </definition>
+</tiles-definitions>

@@ -1,0 +1,22 @@
+.search-input {
+    font-size: 1.6rem;
+    padding: 8px 10px;
+    border: none;
+    outline: 1px solid #eee;
+
+    &:focus {
+        outline: 1px solid var(--primary);
+    }
+}
+
+.search-btn {
+    font-size: 1.6rem;
+    border: none;
+    outline: none;
+    padding: 8px 10px;
+    background-color: inherit;
+
+    &:hover {
+        background-color: #eee;
+    }
+}

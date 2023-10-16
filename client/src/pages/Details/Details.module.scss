@@ -1,0 +1,26 @@
+.heading {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.sub-heading {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.wrapper {
+    background-color: var(--secondary);
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+}
+
+.price {
+    color: var(--primary);
+}
+
+.comment-list {
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+}

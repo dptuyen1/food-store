@@ -1,0 +1,19 @@
+.wrapper {
+    box-shadow: var(--box-shadow);
+    padding: 6px;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: 1px 2px 20px #ccc;
+    }
+}
+
+.product-name {
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+
+.button {
+    font-size: 1.6rem;
+    padding: 6px 10px;
+}

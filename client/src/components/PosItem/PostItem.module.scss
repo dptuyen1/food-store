@@ -1,0 +1,13 @@
+.wrapper {
+    background-color: var(--secondary);
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 1px 2px 20px #ddd;
+    }
+}
