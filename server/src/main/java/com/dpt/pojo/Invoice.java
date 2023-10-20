@@ -62,6 +62,9 @@ public class Invoice implements Serializable {
     private Date createdDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoiceId")
     private Set<Details> detailsSet;
+    @JoinColumn(name = "payment_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Payment paymentId;
     @JoinColumn(name = "shopping_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Shopping shoppingId;
@@ -126,6 +129,14 @@ public class Invoice implements Serializable {
 
     public void setDetailsSet(Set<Details> detailsSet) {
         this.detailsSet = detailsSet;
+    }
+
+    public Payment getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(Payment paymentId) {
+        this.paymentId = paymentId;
     }
 
     public Shopping getShoppingId() {

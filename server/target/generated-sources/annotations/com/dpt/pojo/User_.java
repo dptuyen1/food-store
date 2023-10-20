@@ -5,12 +5,12 @@ import com.dpt.pojo.Promotion;
 import com.dpt.pojo.Review;
 import com.dpt.pojo.Role;
 import java.util.Date;
-import javax.annotation.Generated;
+import javax.annotation.processing.Generated;
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2023-10-16T12:38:21")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2023-10-20T19:49:29", comments="EclipseLink-2.7.10.v20211216-rNA")
 @StaticMetamodel(User.class)
 public class User_ { 
 

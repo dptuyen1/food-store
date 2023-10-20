@@ -11,6 +11,7 @@ import { useCartContext, useUserContext } from '~/hooks';
 import { couponService } from '~/services/coupon';
 import { detailsService } from '~/services/details';
 import { invoiceService } from '~/services/invoice';
+import { payService } from '~/services/pay';
 
 import classNames from 'classnames/bind';
 import styles from './Cart.module.scss';
@@ -107,7 +108,7 @@ const Cart = () => {
         cookie.save('cart', cart);
     };
 
-    const handleCheckOut = async (carts) => {
+    const handleCheckOut = async (carts, type) => {
         if (!user.email || !user.address || !user.phoneNumber) {
             nav('/profile/?next=/cart');
             return;
@@ -115,7 +116,23 @@ const Cart = () => {
 
         setDisable((disable) => !disable);
 
-        let res = await invoiceService.add(totalPrice, quantity, discountPrice);
+        let res = {};
+
+        switch (type) {
+            case 'MOMO':
+                let response = await payService.pay(totalPrice);
+
+                window.open(response.data.payUrl, '_blank');
+
+                res = await invoiceService.add(totalPrice, quantity, discountPrice, 2, 2, 2);
+
+                break;
+            case 'CASH':
+                res = await invoiceService.add(totalPrice, quantity, discountPrice, 2, 2, 1);
+
+                break;
+            default:
+        }
 
         let id = res.data.id;
 
@@ -133,7 +150,6 @@ const Cart = () => {
 
             nav('/tracking');
         }
-
         setDisable((disable) => !disable);
     };
 
@@ -262,10 +278,16 @@ const Cart = () => {
 
                     <div className="d-flex justify-content-end">
                         {!disable ? (
-                            <Button secondary onClick={() => handleCheckOut(cart)}>
-                                <FontAwesomeIcon icon={faSackDollar} className="me-3" />
-                                Thanh toán
-                            </Button>
+                            <div className="d-flex gap-3">
+                                <Button secondary onClick={() => handleCheckOut(cart, 'CASH')}>
+                                    <FontAwesomeIcon icon={faSackDollar} className="me-3" />
+                                    Thanh toán tiền mặt
+                                </Button>
+                                <Button secondary onClick={() => handleCheckOut(cart, 'MOMO')}>
+                                    <FontAwesomeIcon icon={faSackDollar} className="me-3" />
+                                    Thanh toán MoMo
+                                </Button>
+                            </div>
                         ) : (
                             <Spinner animation="border" variant="primary" />
                         )}

@@ -102,8 +102,13 @@
                        value="/WEB-INF/pages/status/details.jsp" />
     </definition>
     <definition name="pos" extends="baseLayout">
-        <put-attribute name="title" value="Tùy chỉnh trạng thái đơn hàng" />
+        <put-attribute name="title" value="Trang bán hàng" />
         <put-attribute name="content"
-                       value="/WEB-INF/pages/pos.jsp" />
+                       value="/WEB-INF/pages/staff/pos.jsp" />
+    </definition>
+    <definition name="invoice" extends="baseLayout">
+        <put-attribute name="title" value="Doanh thu ngày" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/staff/invoice.jsp" />
     </definition>
 </tiles-definitions>

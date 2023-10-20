@@ -3,12 +3,12 @@ import { Col, Image, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
 import Review from '~/components/Review';
+import UserReview from '~/components/UserReview';
+import { useUserContext } from '~/hooks';
 import { productService } from '~/services/product';
 import { reviewService } from '~/services/review';
 
 import classNames from 'classnames/bind';
-import UserReview from '~/components/UserReview';
-import { useUserContext } from '~/hooks';
 import styles from './Details.module.scss';
 
 const cx = classNames.bind(styles);

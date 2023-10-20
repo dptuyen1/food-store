@@ -34,8 +34,7 @@ import org.springframework.format.annotation.DateTimeFormat;
     @NamedQuery(name = "Review.findAll", query = "SELECT r FROM Review r"),
     @NamedQuery(name = "Review.findById", query = "SELECT r FROM Review r WHERE r.id = :id"),
     @NamedQuery(name = "Review.findByContent", query = "SELECT r FROM Review r WHERE r.content = :content"),
-    @NamedQuery(name = "Review.findByCreatedDate", query = "SELECT r FROM Review r WHERE r.createdDate = :createdDate"),
-    @NamedQuery(name = "Review.findByUpdatedDate", query = "SELECT r FROM Review r WHERE r.updatedDate = :updatedDate")})
+    @NamedQuery(name = "Review.findByCreatedDate", query = "SELECT r FROM Review r WHERE r.createdDate = :createdDate")})
 public class Review implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -93,14 +92,6 @@ public class Review implements Serializable {
         this.createdDate = createdDate;
     }
 
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
     public Product getProductId() {
         return productId;
     }
@@ -140,6 +131,14 @@ public class Review implements Serializable {
     @Override
     public String toString() {
         return "com.dpt.pojo.Review[ id=" + id + " ]";
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
 
 }

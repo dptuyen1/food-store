@@ -11,7 +11,6 @@ import com.dpt.repository.UserRepository;
 import com.dpt.service.InvoiceService;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,8 +30,13 @@ public class InvoiceServiceImpl implements InvoiceService {
     private UserRepository userRepository;
 
     @Override
-    public List<Invoice> getInvoices(Map<String, String> params) {
-        return this.invoiceRepository.getInvoices(params);
+    public List<Invoice> getInvoicesOfCurrentDay() {
+        return this.invoiceRepository.getInvoicesOfCurrentDay();
+    }
+
+    @Override
+    public List<Invoice> getPendingInvocies() {
+        return this.invoiceRepository.getPendingInvocies();
     }
 
     @Override
@@ -47,8 +51,6 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public Invoice add(Invoice invoice) {
-
-//        Khong dang nhap, mua tai cua hang
         if (invoice.getUserId() == null) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             User user = this.userRepository.getByUsername(authentication.getName());
@@ -66,6 +68,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         Invoice i = this.invoiceRepository.getById(id);
 
         i.setStatusId(invoice.getStatusId());
+        i.setUserId(invoice.getUserId());
 
         return this.invoiceRepository.addOrUpdate(i);
     }
@@ -76,5 +79,4 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         return this.invoiceRepository.delete(invoice);
     }
-
 }

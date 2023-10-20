@@ -48,10 +48,10 @@ const Product = ({ data }) => {
 
     return (
         <Card className={cx('wrapper', 'my-3')} style={{ width: 'fitContent' }}>
-            <Card.Img variant="top" src={data?.image || images['no-image']} />
+            <Card.Img variant="top" src={data?.image || images['no-image']} width={200} height={200} />
             <hr />
             <Card.Body>
-                <Card.Title className={cx('product-name')}>{data.name}</Card.Title>
+                <Card.Title className={cx('product-name', 'text-truncate')}>{data.name}</Card.Title>
                 <Card.Text className={cx('product-price')}>
                     {data.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
                 </Card.Text>

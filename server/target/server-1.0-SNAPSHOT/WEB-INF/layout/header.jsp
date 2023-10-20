@@ -34,6 +34,11 @@
                         </div>
                     </div>
                 </sec:authorize>
+
+                <sec:authorize access="hasRole('ROLE_STAFF')">
+                    <a href="<c:url value="/pos" />" class="nav-link px-2 text-dark link-primary">Bán hàng</a>
+                    <a href="<c:url value="/invoices" />" class="nav-link px-2 text-dark link-primary">Doanh thu ngày</a>
+                </sec:authorize>
             </ul>
 
             <div class="text-end">

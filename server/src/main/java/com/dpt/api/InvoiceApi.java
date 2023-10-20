@@ -7,6 +7,7 @@ package com.dpt.api;
 import com.dpt.dto.InvoiceDTO;
 import com.dpt.pojo.Invoice;
 import com.dpt.service.InvoiceService;
+import com.dpt.utils.MailUtil;
 import java.util.Arrays;
 import java.util.List;
 import org.modelmapper.ModelMapper;
@@ -38,6 +39,9 @@ public class InvoiceApi {
     private InvoiceService invoiceService;
 
     @Autowired
+    private MailUtil mailUtils;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @GetMapping(path = "/invoices")
@@ -52,6 +56,15 @@ public class InvoiceApi {
     public ResponseEntity<InvoiceDTO> add(@RequestBody Invoice invoice) {
         Invoice i = this.invoiceService.add(invoice);
         InvoiceDTO invoiceDTO = modelMapper.map(i, InvoiceDTO.class);
+
+        if (invoice.getShoppingId().getId().equals(2)) {
+            String payment = "";
+            if (invoice.getPaymentId().getId().equals(2)) {
+                payment = "MoMo";
+            }
+            payment = "tiền mặt";
+            mailUtils.sendMail(invoice.getUserId().getEmail(), invoice.getTotalPrice(), payment);
+        }
 
         return new ResponseEntity<>(invoiceDTO, HttpStatus.CREATED);
     }

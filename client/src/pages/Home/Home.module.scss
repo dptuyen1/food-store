@@ -11,3 +11,30 @@
     padding: 20px 0;
     margin: 20px 0;
 }
+
+.category {
+    color: var(--text-color);
+    text-transform: uppercase;
+    position: relative;
+    padding: 0 30px;
+
+    &:hover {
+        color: rgba($color: #413e3e, $alpha: 0.5);
+    }
+
+    &::after {
+        display: block;
+        content: '';
+        width: 1px;
+        height: 30px;
+        background-color: #999;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+    }
+
+    &:last-child::after {
+        display: none;
+    }
+}

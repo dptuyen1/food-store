@@ -1,25 +1,20 @@
 import { Col, Image, Row } from 'react-bootstrap';
 import cookie from 'react-cookies';
+import { useCartContext } from '~/hooks';
 
 import classNames from 'classnames/bind';
 import styles from './PostItem.module.scss';
 
-import { useCartContext } from '~/hooks';
-
 const cx = classNames.bind(styles);
 
-const PostItem = ({ data }) => {
+const PostItem = ({ data, cart }) => {
     const [, dispatch] = useCartContext();
-
-    // const [cart, setCart] = useState(cookie.load('cart') || {});
 
     const handleAddToCart = (product) => {
         dispatch({
             type: 'INCREASE',
             payload: 1,
         });
-
-        let cart = cookie.load('cart') || null;
 
         if (!cart) cart = {};
 

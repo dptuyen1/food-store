@@ -6,6 +6,8 @@ package com.dpt.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.dpt.utils.MailUtil;
+import com.dpt.utils.MomoUtil;
 import java.text.SimpleDateFormat;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +46,15 @@ public class CloudinaryConfig {
     @Bean
     public SimpleDateFormat simpleDateFormat() {
         return new SimpleDateFormat("yyyy-MM-dd");
+    }
+
+    @Bean
+    public MomoUtil momoUtils() {
+        return new MomoUtil();
+    }
+
+    @Bean
+    public MailUtil mailUtils() {
+        return new MailUtil();
     }
 }

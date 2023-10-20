@@ -6,7 +6,6 @@ package com.dpt.service;
 
 import com.dpt.pojo.Invoice;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -14,7 +13,9 @@ import java.util.Map;
  */
 public interface InvoiceService {
 
-    List<Invoice> getInvoices(Map<String, String> params);
+    List<Invoice> getInvoicesOfCurrentDay();
+
+    List<Invoice> getPendingInvocies();
 
     List<Invoice> getByUser();
 

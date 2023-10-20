@@ -38,7 +38,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Thức ăn'),(2,'Nước uống'),(3,'Ăn vặt'),(4,'Combo'),(5,'Tráng miệng');
+INSERT INTO `category` VALUES (1,'Thức ăn'),(2,'Nước uống'),(3,'Ăn vặt'),(4,'Combo gia đình'),(5,'Tráng miệng');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +87,7 @@ CREATE TABLE `details` (
   KEY `fk_details_product1_idx` (`product_id`),
   CONSTRAINT `fk_details_invoice1` FOREIGN KEY (`invoice_id`) REFERENCES `invoice` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_details_product1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,6 +96,7 @@ CREATE TABLE `details` (
 
 LOCK TABLES `details` WRITE;
 /*!40000 ALTER TABLE `details` DISABLE KEYS */;
+INSERT INTO `details` VALUES (54,57500.00,1,3,29),(55,28000.00,1,15,29),(56,15000.00,1,25,29),(57,67500.00,1,4,30),(58,37500.00,1,13,30),(59,15000.00,1,24,30),(60,28000.00,4,12,31),(61,79000.00,2,20,31),(62,15000.00,2,24,31),(63,82000.00,1,1,32),(64,28000.00,1,12,32),(65,180000.00,1,18,32);
 /*!40000 ALTER TABLE `details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,16 +115,19 @@ CREATE TABLE `invoice` (
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `status_id` int NOT NULL,
   `shopping_id` int NOT NULL,
+  `payment_id` int NOT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idinvoice_UNIQUE` (`id`),
-  KEY `fk_invoice_shopping1_idx` (`shopping_id`) /*!80000 INVISIBLE */,
-  KEY `fk_invoice_user1_idx` (`user_id`) /*!80000 INVISIBLE */,
   KEY `fk_invoice_status1_idx` (`status_id`),
+  KEY `fk_invoice_shopping1_idx` (`shopping_id`),
+  KEY `fk_invoice_payment1_idx` (`payment_id`),
+  KEY `fk_invoice_user1_idx` (`user_id`),
+  CONSTRAINT `fk_invoice_payment1` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_invoice_shopping1` FOREIGN KEY (`shopping_id`) REFERENCES `shopping` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_invoice_status1` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_invoice_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +136,33 @@ CREATE TABLE `invoice` (
 
 LOCK TABLES `invoice` WRITE;
 /*!40000 ALTER TABLE `invoice` DISABLE KEYS */;
+INSERT INTO `invoice` VALUES (29,100500.00,3,0.00,'2023-10-20 20:11:20',2,2,1,3),(30,120000.00,3,0.00,'2023-10-20 20:12:00',2,2,2,3),(31,270000.00,8,30000.00,'2023-10-20 20:14:12',2,2,2,4),(32,290000.00,3,0.00,'2023-10-20 20:16:08',2,1,1,2);
 /*!40000 ALTER TABLE `invoice` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `payment`
+--
+
+DROP TABLE IF EXISTS `payment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `payment` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idpayment_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `payment`
+--
+
+LOCK TABLES `payment` WRITE;
+/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+INSERT INTO `payment` VALUES (1,'PAYMENT_CASH'),(2,'PAYMENT_MOMO');
+/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -153,7 +183,7 @@ CREATE TABLE `product` (
   UNIQUE KEY `idproduct_UNIQUE` (`id`),
   KEY `fk_product_category1_idx` (`category_id`),
   CONSTRAINT `fk_product_category1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +192,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (54,'Gà giòn (2 miếng)',82000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432286/food-store/rqkycskvf1o4jawbz6ak.png',_binary '',1),(55,'Gà tắm nước mắm',112500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432286/food-store/k62rfe78auc2yassltoc.jpg',_binary '',1),(56,'Gà không xương (3 miếng)',57500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432286/food-store/qolkqqbj2zdmmlxpja8r.jpg',_binary '',1),(57,'Gà không xương đặc biệt',67500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432286/food-store/u32ojxayjnvcmp3rqv5h.png',_binary '',1),(58,'Gà và hải sản',73500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432287/food-store/eyjvqqb4iovemg4fq76h.jpg',_binary '',1),(59,'Dasani',24500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432285/food-store/qoe7exstdy564xfbu9xk.jpg',_binary '',2),(60,'Coca Cola',24500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432285/food-store/tkontki6yw5t0k1uvlea.png',_binary '',2),(61,'Sprite',24500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432285/food-store/humow8rmluccoedh4bci.jpg',_binary '',2),(62,'Fanta',24500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432285/food-store/btaeppia11vgu0camp9i.jpg',_binary '',2),(63,'Coke Zero',24500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432286/food-store/f6u53kr7sscgdktx5vph.jpg',_binary '',2),(64,'Khoai tây chiên (Lớn)',38000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432287/food-store/kipcyivbgahal2vnxhim.jpg',_binary '',3),(65,'Popcorn sốt phô mai',28000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432287/food-store/g4mrm52drehhe8njcbeb.jpg',_binary '',3),(66,'Chả cá rong biển',37500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432288/food-store/cal6fmdualzmo4ib19qa.png',_binary '',3),(67,'Snack cá',35000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432289/food-store/kktbrpru3rjib4nbp7rt.jpg',_binary '',3),(68,'Donut tôm',28000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432287/food-store/fhjj7dum44ynschwqaod.jpg',_binary '',3),(69,'Mua 1 Tặng 1 - 2 Miếng gà + Nước',99000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432284/food-store/gzkosr4wamj51rpv7yj9.jpg',_binary '',4),(70,'Mua 1 Tặng 1 - 3 Miếng gà + 2 Nước',161000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432284/food-store/ypc0lpynaoyhhuml4c5s.jpg',_binary '',4),(71,'FLASH SALE MAYO B - NHẬP MÃ \"MAYOB\"',180000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432284/food-store/ox2ghp1a2ydhcyeh0u8t.png',_binary '',4),(72,'COMBO HAPPY MEAL 2 (GIÁ GỐC 150K)',99000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432284/food-store/drjaygrm1qcl5iynwftn.png',_binary '',4),(73,'COMBO HAPPY MEAL 1 - GIÁ GỐC 107K',79000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432284/food-store/ouz5mdkgngg4ddnmykk4.png',_binary '',4),(74,'Bánh xoài đào',10000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432284/food-store/yguaocqqmb5k3skep1rw.png',_binary '',5),(75,'Tropical Sundae',20000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432284/food-store/soxzrrtmt1jfdnjxqrgg.png',_binary '',5),(76,'Kem sữa tươi (Cúp)',5000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432285/food-store/ndfccz3imbbquqxdmogf.png',_binary '',5),(77,'Kem sundae dâu',15000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432285/food-store/tdf5nswfsycy7o1rtdyt.png',_binary '',5),(78,'Kem sundae socola',15000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432285/food-store/gpmiarcvvndmuwfvfwvg.png',_binary '',5);
+INSERT INTO `product` VALUES (1,'Gà giòn (2 miếng)',82000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432286/food-store/rqkycskvf1o4jawbz6ak.png',_binary '',1),(2,'Gà tắm nước mắm',112500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432286/food-store/k62rfe78auc2yassltoc.jpg',_binary '',1),(3,'Gà không xương (3 miếng)',57500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432286/food-store/qolkqqbj2zdmmlxpja8r.jpg',_binary '',1),(4,'Gà không xương đặc biệt',67500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432286/food-store/u32ojxayjnvcmp3rqv5h.png',_binary '',1),(5,'Gà và hải sản',73500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432287/food-store/eyjvqqb4iovemg4fq76h.jpg',_binary '',1),(6,'Dasani',24500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432285/food-store/qoe7exstdy564xfbu9xk.jpg',_binary '',2),(7,'Coca Cola',24500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432285/food-store/tkontki6yw5t0k1uvlea.png',_binary '',2),(8,'Sprite',24500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432285/food-store/humow8rmluccoedh4bci.jpg',_binary '',2),(9,'Fanta',24500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432285/food-store/btaeppia11vgu0camp9i.jpg',_binary '',2),(10,'Coke Zero',24500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432286/food-store/f6u53kr7sscgdktx5vph.jpg',_binary '',2),(11,'Khoai tây chiên (Lớn)',38000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432287/food-store/kipcyivbgahal2vnxhim.jpg',_binary '',3),(12,'Popcorn sốt phô mai',28000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432287/food-store/g4mrm52drehhe8njcbeb.jpg',_binary '',3),(13,'Chả cá rong biển',37500.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432288/food-store/cal6fmdualzmo4ib19qa.png',_binary '',3),(14,'Snack cá',35000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432289/food-store/kktbrpru3rjib4nbp7rt.jpg',_binary '',3),(15,'Donut tôm',28000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432287/food-store/fhjj7dum44ynschwqaod.jpg',_binary '',3),(16,'Mua 1 Tặng 1 - 2 Miếng gà + Nước',99000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432284/food-store/gzkosr4wamj51rpv7yj9.jpg',_binary '',4),(17,'Mua 1 Tặng 1 - 3 Miếng gà + 2 Nước',161000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432284/food-store/ypc0lpynaoyhhuml4c5s.jpg',_binary '',4),(18,'FLASH SALE MAYO B - NHẬP MÃ MAYOB',180000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432284/food-store/ox2ghp1a2ydhcyeh0u8t.png',_binary '',4),(19,'COMBO HAPPY MEAL 2 (GIÁ GỐC 150K)',99000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432284/food-store/drjaygrm1qcl5iynwftn.png',_binary '',4),(20,'COMBO HAPPY MEAL 1 - GIÁ GỐC 107K',79000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432284/food-store/ouz5mdkgngg4ddnmykk4.png',_binary '',4),(21,'Bánh xoài đào',10000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432284/food-store/yguaocqqmb5k3skep1rw.png',_binary '',5),(22,'Tropical Sundae',20000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432284/food-store/soxzrrtmt1jfdnjxqrgg.png',_binary '',5),(23,'Kem sữa tươi (Cúp)',5000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432285/food-store/ndfccz3imbbquqxdmogf.png',_binary '',5),(24,'Kem sundae dâu',15000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432285/food-store/tdf5nswfsycy7o1rtdyt.png',_binary '',5),(25,'Kem sundae socola',15000.00,'https://res.cloudinary.com/dzbcst18v/image/upload/v1697432285/food-store/gpmiarcvvndmuwfvfwvg.png',_binary '',5);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +215,7 @@ CREATE TABLE `promotion` (
   KEY `fk_promotion_coupon1_idx` (`coupon_id`),
   CONSTRAINT `fk_promotion_coupon1` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_promotion_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,6 +224,7 @@ CREATE TABLE `promotion` (
 
 LOCK TABLES `promotion` WRITE;
 /*!40000 ALTER TABLE `promotion` DISABLE KEYS */;
+INSERT INTO `promotion` VALUES (2,'2023-10-20 20:13:08','2023-11-20 20:13:08',4,1);
 /*!40000 ALTER TABLE `promotion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,7 +248,7 @@ CREATE TABLE `review` (
   KEY `fk_review_product1_idx` (`product_id`),
   CONSTRAINT `fk_review_product1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_review_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,6 +257,7 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
+INSERT INTO `review` VALUES (2,'Ngon','2023-10-20 20:14:40',NULL,4,1),(3,'Rất ngon!','2023-10-20 20:14:50',NULL,4,17);
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -288,10 +320,10 @@ DROP TABLE IF EXISTS `status`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `status` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idstatus_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -300,7 +332,7 @@ CREATE TABLE `status` (
 
 LOCK TABLES `status` WRITE;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
-INSERT INTO `status` VALUES (1,'STATUS_PENDING'),(2,'STATUS_PAID');
+INSERT INTO `status` VALUES (1,'STATUS_PENDING'),(2,'STATUS_PAID'),(3,'STATUS_CANCELED');
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -328,7 +360,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `username_UNIQUE` (`username`),
   KEY `fk_user_role_idx` (`role_id`),
   CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -337,7 +369,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Tuyền','Đặng','dptuyen1@gmail.com','Gò Vấp','0932012306','admin','$2a$12$Z6YFEAR70t3tCZbMs3qvxun2rAdlYBlGpMs0IbMYPv8K3va59bZqi','https://res.cloudinary.com/dzbcst18v/image/upload/v1697432282/food-store/de4lcqdcsuc7kltij8kd.png','2023-10-16 11:45:33',1),(2,'Tuyền','Đặng','dptuyen1@gmail.com','Gò Vấp','0932012306','staff','$2a$12$Z6YFEAR70t3tCZbMs3qvxun2rAdlYBlGpMs0IbMYPv8K3va59bZqi','https://res.cloudinary.com/dzbcst18v/image/upload/v1697432282/food-store/o8mojndh7jusgo5c2yz6.png','2023-10-16 12:01:35',2),(3,'Tuyền','Đặng','dptuyen1@gmail.com','Gò Vấp','0932012306','customer','$2a$12$Z6YFEAR70t3tCZbMs3qvxun2rAdlYBlGpMs0IbMYPv8K3va59bZqi','https://res.cloudinary.com/dzbcst18v/image/upload/v1697432282/food-store/dx5prvnb76hb3okxj1xl.png','2023-10-16 12:01:35',3);
+INSERT INTO `user` VALUES (1,'Tuyền','Đặng','dptuyen1@gmail.com','157/20 Phạm Văn Chiêu, phường 14, quận Gò Vấp','0932012306','admin','$2a$12$zx98MTNJesWJIqj3EOZx4.cAVHX6/MmHTpApTbCNYCGy/IXtbc/KW','https://res.cloudinary.com/dzbcst18v/image/upload/v1697432282/food-store/de4lcqdcsuc7kltij8kd.png','2023-10-04 12:12:19',1),(2,'Tuyền','Đặng','dptuyen1@gmail.com','157/20 Phạm Văn Chiêu, phường 14, quận Gò Vấp','0932012306','staff','$2a$12$zx98MTNJesWJIqj3EOZx4.cAVHX6/MmHTpApTbCNYCGy/IXtbc/KW','https://res.cloudinary.com/dzbcst18v/image/upload/v1697432282/food-store/o8mojndh7jusgo5c2yz6.png','2023-10-20 00:38:15',2),(3,'Tuyền','Đặng','dptuyen1@gmail.com','157/20 Phạm Văn Chiêu, phường 14, quận Gò Vấp','0932012306','customer','$2a$10$xjqiFNfq5BR.soKZb9TUJuCmwpXfhGPelrKPXNYP/RdlUAJ7cqVP6','https://res.cloudinary.com/dzbcst18v/image/upload/v1697432282/food-store/dx5prvnb76hb3okxj1xl.png','2023-10-20 09:00:47',3),(4,'Tuyền','Đặng','dptuyen1@gmail.com','Gò Vấp','0932012306','customer1','$2a$10$cHEecfdxDgjUV6OJTgSlmePtaM9OiIvZfjoOEykV4i4iBUDDSfANu',NULL,'2023-10-20 20:13:08',3),(5,'Tuyền','Đặng','dptuyen1@gmail.com','Gò Vấp','0932012306','staff1','$2a$10$jLtkCYxsmmPH3XL2ogXaI.beLrSdmlHRFD6u1WsZgAUaTd1XYNXgS',NULL,'2023-10-20 20:19:17',2);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -350,4 +382,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-16 12:35:48
+-- Dump completed on 2023-10-20 20:47:39

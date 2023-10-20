@@ -1,26 +1,26 @@
-import { useState } from 'react';
 import { Table } from 'react-bootstrap';
 import cookie from 'react-cookies';
 
+import { useCartContext } from '~/hooks';
+import { detailsService } from '~/services/details';
 import { invoiceService } from '~/services/invoice';
 import Button from '../Button';
 
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import { useCartContext } from '~/hooks';
-import { detailsService } from '~/services/details';
 import styles from './Monitor.module.scss';
 
 const cx = classNames.bind(styles);
 
-const Monitor = () => {
-    const [cart, setCart] = useState(cookie.load('cart') || {});
+const Monitor = ({ cart, handleClearCart, handleUpdateCart }) => {
     const [, dispatch] = useCartContext();
 
     const quantity = Object.values(cart).reduce((init, item) => init + item['quantity'], 0);
     const sum = Object.values(cart).reduce((init, item) => init + item['price'] * item['quantity'], 0);
 
     const handleCheckOut = async (cart) => {
-        let res = await invoiceService.addInStore(sum, quantity);
+        let res = await invoiceService.add(sum, quantity, 0, 1, 1, 1, 1);
 
         let id = res.data.id;
 
@@ -34,8 +34,28 @@ const Monitor = () => {
                 payload: 0,
             });
 
-            setCart({});
+            handleClearCart();
         }
+    };
+
+    const handleDeleteItem = (item) => {
+        dispatch({
+            type: 'DECREASE',
+            payload: item.quantity,
+        });
+
+        handleUpdateCart(item);
+    };
+
+    const handleClear = () => {
+        dispatch({
+            type: 'UPDATE',
+            payload: 0,
+        });
+
+        cookie.remove('cart');
+
+        handleClearCart();
     };
 
     return (
@@ -45,8 +65,9 @@ const Monitor = () => {
                     <tr>
                         <th>Tên</th>
                         <th>Giá</th>
-                        <th>Số lượng sản phẩm</th>
+                        <th>Số lượng</th>
                         <th>Tổng tiền</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,12 +89,17 @@ const Monitor = () => {
                                             currency: 'VND',
                                         })}
                                     </td>
+                                    <td>
+                                        <Button danger onClick={() => handleDeleteItem(item)}>
+                                            <FontAwesomeIcon icon={faTrash} />
+                                        </Button>
+                                    </td>
                                 </tr>
                             );
                         })}
 
                     <tr>
-                        <td colSpan={3}>
+                        <td colSpan={2}>
                             <h4>
                                 Số lượng: {''}
                                 {quantity}
@@ -92,9 +118,12 @@ const Monitor = () => {
                 </tbody>
             </Table>
             {Object.values(cart).length > 0 && (
-                <div>
+                <div className="d-flex justify-content-between">
                     <Button secondary onClick={() => handleCheckOut(cart)}>
                         Hoàn tất
+                    </Button>
+                    <Button danger onClick={handleClear}>
+                        Xóa tất cả
                     </Button>
                 </div>
             )}

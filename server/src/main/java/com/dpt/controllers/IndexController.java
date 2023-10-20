@@ -5,12 +5,15 @@
 package com.dpt.controllers;
 
 import com.dpt.pojo.Invoice;
+import com.dpt.pojo.User;
 import com.dpt.service.InvoiceService;
 import com.dpt.service.StatsService;
 import com.dpt.service.UserService;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,10 +49,24 @@ public class IndexController {
     }
 
     @RequestMapping("/pos")
-    public String pos(Model model, @RequestParam Map<String, String> params) {
-        List<Invoice> invoices = this.invoiceSerivce.getInvoices(params);
+    public String pos(Model model) {
+        List<Invoice> invoices = this.invoiceSerivce.getPendingInvocies();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = this.userService.getByUsername(authentication.getName());
 
         model.addAttribute("invoices", invoices);
+        model.addAttribute("user", user);
+
         return "pos";
+    }
+
+    @RequestMapping("/invoices")
+    public String invoice(Model model) {
+        List<Invoice> invoices = this.invoiceSerivce.getInvoicesOfCurrentDay();
+
+        model.addAttribute("invoices", invoices);
+
+        return "invoice";
     }
 }

@@ -4,12 +4,12 @@ import com.dpt.pojo.Category;
 import com.dpt.pojo.Details;
 import com.dpt.pojo.Review;
 import java.math.BigDecimal;
-import javax.annotation.Generated;
+import javax.annotation.processing.Generated;
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2023-10-16T12:38:21")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2023-10-20T19:49:29", comments="EclipseLink-2.7.10.v20211216-rNA")
 @StaticMetamodel(Product.class)
 public class Product_ { 
 

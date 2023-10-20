@@ -7,15 +7,11 @@ package com.dpt.repository.impl;
 import com.dpt.pojo.Invoice;
 import com.dpt.pojo.User;
 import com.dpt.repository.InvoiceRepository;
-import com.dpt.repository.ProductRepository;
 import com.dpt.repository.UserRepository;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -40,11 +36,45 @@ public class InvoiceRepositoryImpl implements InvoiceRepository {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private ProductRepository productRepository;
+    @Override
+    public List<Invoice> getInvoicesOfCurrentDay() {
+        Session session = this.factory.getObject().getCurrentSession();
+
+//        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+//        CriteriaQuery<Invoice> criteriaQuery = criteriaBuilder.createQuery(Invoice.class);
+//
+//        Root root = criteriaQuery.from(Invoice.class);
+//        criteriaQuery.select(root);
+//
+//        if (params != null && !params.isEmpty()) {
+//            List<Predicate> predicates = new ArrayList<>();
+//
+//            String statusId = params.get("statusId");
+//            if (statusId != null && !statusId.isEmpty()) {
+//                predicates.add(criteriaBuilder.equal(root.get("statusId"), Integer.valueOf(statusId)));
+//            }
+//
+//            String paymentId = params.get("paymentId");
+//            if (paymentId != null && !paymentId.isEmpty()) {
+//                predicates.add(criteriaBuilder.equal(root.get("paymentId"), Integer.valueOf(paymentId)));
+//            }
+//
+//            String shoppingId = params.get("shoppingId");
+//            if (shoppingId != null && !shoppingId.isEmpty()) {
+//                predicates.add(criteriaBuilder.equal(root.get("shoppingId"), Integer.valueOf(shoppingId)));
+//            }
+//
+//            predicates.add(criteriaBuilder.equal(root.get("createdDate"), criteriaBuilder.currentDate()));
+//
+//            criteriaQuery.where(predicates.toArray(Predicate[]::new));
+//        }
+        Query query = session.createQuery("FROM Invoice where date(createdDate) = curdate()");
+
+        return query.getResultList();
+    }
 
     @Override
-    public List<Invoice> getInvoices(Map<String, String> params) {
+    public List<Invoice> getPendingInvocies() {
         Session session = this.factory.getObject().getCurrentSession();
 
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
@@ -53,25 +83,12 @@ public class InvoiceRepositoryImpl implements InvoiceRepository {
         Root root = criteriaQuery.from(Invoice.class);
         criteriaQuery.select(root);
 
-        if (params != null && !params.isEmpty()) {
-            List<Predicate> predicates = new ArrayList<>();
-
-            String statusId = params.get("statusId");
-            if (statusId != null && !statusId.isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("statusId"), Integer.valueOf(statusId)));
-            }
-
-            String shoppingId = params.get("shoppingId");
-            if (shoppingId != null && !shoppingId.isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("shoppingId"), Integer.valueOf(shoppingId)));
-            }
-
-            criteriaQuery.where(predicates.toArray(Predicate[]::new));
-        }
+        criteriaQuery.where(criteriaBuilder.equal(root.get("statusId"), 1));
 
         Query query = session.createQuery(criteriaQuery);
 
         return query.getResultList();
+
     }
 
     @Override

@@ -195,7 +195,7 @@
     let data = {}, config = {};
 
     data = setData(productLabels, productLabel, productInfo);
-    config = setConfig("pie", data);
+    config = setConfig("bar", data);
     new Chart(productCtx, config);
 
     data = setData(invoiceLabels, invoiceLabel, invoiceInfo);

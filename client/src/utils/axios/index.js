@@ -9,6 +9,7 @@ const ENDPOINTS = {
     'product-details': (id) => `/api/products/${id}`,
     invoice: '/api/invoices',
     details: '/api/details',
+    pay: '/api/pay',
     promotion: '/api/promotions',
     payment: '/api/payments',
     coupon: '/api/coupons',

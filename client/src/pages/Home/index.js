@@ -16,7 +16,7 @@ const Home = () => {
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
 
-    const [query] = useSearchParams();
+    const [query, setQuery] = useSearchParams();
 
     useEffect(() => {
         const loadCategories = async () => {
@@ -38,11 +38,20 @@ const Home = () => {
         loadProducts();
     }, [query]);
 
+    const handleClick = (e) => {
+        e.preventDefault();
+
+        setQuery('');
+    };
+
     return (
         <>
             <h1 className={cx('heading')}>Sản phẩm của chúng tôi</h1>
 
             <Nav className={cx('category-list')}>
+                <Nav.Link className={cx('category')} href="/" onClick={handleClick}>
+                    Tất cả
+                </Nav.Link>
                 {categories.map((category) => {
                     return <Category key={category.id} data={category} />;
                 })}

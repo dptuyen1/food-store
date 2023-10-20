@@ -1,5 +1,5 @@
 import * as axios from '~/utils/axios';
-import { ANONYMOUS_REQUEST, AUTH_REQUEST, ENDPOINTS } from '~/utils/axios';
+import { AUTH_REQUEST, ENDPOINTS } from '~/utils/axios';
 
 const getInvoices = async () => {
     try {
@@ -11,14 +11,16 @@ const getInvoices = async () => {
     }
 };
 
-const add = async (totalPrice, totalQuantity, discountPrice = 0) => {
+const add = async (totalPrice, totalQuantity, discountPrice = 0, statusId, shoppingId, paymentId, userId) => {
     try {
         let res = await axios.post(AUTH_REQUEST(), ENDPOINTS['invoice'], {
             totalPrice: totalPrice,
             totalQuantity: totalQuantity,
             discountPrice: discountPrice,
-            statusId: 2,
-            shoppingId: 2,
+            statusId: statusId,
+            shoppingId: shoppingId,
+            paymentId: paymentId,
+            userId: userId,
         });
 
         return res;
@@ -28,22 +30,4 @@ const add = async (totalPrice, totalQuantity, discountPrice = 0) => {
     }
 };
 
-const addInStore = async (totalPrice, totalQuantity, discountPrice = 0) => {
-    try {
-        let res = await axios.post(ANONYMOUS_REQUEST, ENDPOINTS['invoice'], {
-            totalPrice: totalPrice,
-            totalQuantity: totalQuantity,
-            discountPrice: discountPrice,
-            statusId: 1,
-            shoppingId: 1,
-            userId: 1,
-        });
-
-        return res;
-    } catch (err) {
-        console.log(err);
-        return err;
-    }
-};
-
-export { add, addInStore, getInvoices };
+export { add, getInvoices };

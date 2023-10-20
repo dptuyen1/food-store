@@ -55,12 +55,6 @@ public class DetailsApi {
         return new ResponseEntity<>(detailsDTO, HttpStatus.OK);
     }
 
-//    @PostMapping(path = "/details", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<String> add(@RequestBody Map<String, CartDTO> carts, @RequestBody int id) {
-//        this.detailsService.add(carts, id);
-//
-//        return new ResponseEntity<>("Created!", HttpStatus.CREATED);
-//    }
     @PostMapping(path = "/details", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@RequestBody ReceiptDTO test) {
         this.detailsService.add(test.getCarts(), test.getInvoiceId());

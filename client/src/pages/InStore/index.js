@@ -27,17 +27,34 @@ const InStore = () => {
         loadProducts();
     }, []);
 
+    const handleClearCart = () => {
+        setCart({});
+    };
+
+    const handleUpdateCart = (item) => {
+        if (item.id in cart) {
+            setCart((current) => {
+                delete current[item.id];
+                cookie.save('cart', current);
+
+                if (!Object.keys(current).length) cookie.remove('cart');
+
+                return current;
+            });
+        }
+    };
+
     return (
         <>
-            <Row>
+            <Row className="gap-5">
+                <Col>
+                    <Monitor cart={cart} handleClearCart={handleClearCart} handleUpdateCart={handleUpdateCart} />
+                </Col>
                 <Col md={6}>
                     {products.length > 0 &&
                         products.map((product) => {
-                            return <PostItem key={product.id} data={product} />;
+                            return <PostItem key={product.id} cart={cart} data={product} />;
                         })}
-                </Col>
-                <Col>
-                    <Monitor />
                 </Col>
             </Row>
         </>
