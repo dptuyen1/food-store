@@ -17,6 +17,8 @@ import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,10 +29,14 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
+@PropertySource("classpath:configs.properties")
 public class ProductRepositoryImpl implements ProductRepository {
 
     @Autowired
     private LocalSessionFactoryBean factory;
+
+    @Autowired
+    private Environment env;
 
     @Override
     public List<Product> getProducts(Map<String, String> params) {
@@ -42,7 +48,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         Root root = criteriaQuery.from(Product.class);
         criteriaQuery.select(root);
 
-        if (params != null) {
+        if (params != null && !params.isEmpty()) {
             List<Predicate> predicates = new ArrayList<>();
 
             String kw = params.get("kw");
@@ -70,6 +76,17 @@ public class ProductRepositoryImpl implements ProductRepository {
 
 //        criteriaQuery.orderBy(criteriaBuilder.desc(root.get("id")));
         Query query = session.createQuery(criteriaQuery);
+
+        if (params != null) {
+            String p = params.get("page");
+            if (p != null && !p.isEmpty()) {
+                int page = Integer.parseInt(p);
+                int pageSize = Integer.parseInt(this.env.getProperty("page_size"));
+
+                query.setMaxResults(pageSize);
+                query.setFirstResult((page - 1) * pageSize);
+            }
+        }
 
         return query.getResultList();
     }
@@ -107,5 +124,13 @@ public class ProductRepositoryImpl implements ProductRepository {
             ex.printStackTrace();
             return -1;
         }
+    }
+
+    @Override
+    public Long count() {
+        Session session = this.factory.getObject().getCurrentSession();
+        Query query = session.createQuery("SELECT Count(*) FROM Product");
+
+        return Long.valueOf(query.getSingleResult().toString());
     }
 }

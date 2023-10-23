@@ -52,22 +52,24 @@
                 <button type="submit" class="btn btn-primary">Thống kê</button>
             </form>
 
-            <table class="table table-hover my-4 text-center">
-                <thead>
-                    <tr>
-                        <th scope="col">Tên</th>
-                        <th scope="col">Số lượng</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${products}" var="product">
+            <div style="max-height: 300px; overflow-y: scroll">
+                <table class="table table-hover my-4 text-center">
+                    <thead>
                         <tr>
-                            <th scope="row">${product[0]}</th>
-                            <td>${product[1]}</td>
+                            <th scope="col">Tên</th>
+                            <th scope="col">Số lượng</th>
                         </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${products}" var="product">
+                            <tr>
+                                <th scope="row">${product[0]}</th>
+                                <td>${product[1]}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="col">
@@ -113,7 +115,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <c:set var="totalInvoice" value="0" />
+                    <c:set var="totalQuantity" value="0" />
+                    <c:set var="totalPrice" value="0" />
                     <c:forEach items="${invoices}" var="invoice">
+                        <c:set var="totalInvoice" value="${totalInvoice + invoice[1]}" />
+                        <c:set var="totalQuantity" value="${totalQuantity + invoice[2]}" />
+                        <c:set var="totalPrice" value="${totalPrice + invoice[3]}" />
                         <tr>
                             <th scope="row">${invoice[0]}</th>
                             <td>${invoice[1]}</td>
@@ -122,6 +130,13 @@
                             <td>${price}</td>
                         </tr>
                     </c:forEach>
+                    <tr>
+                        <th scope="row">Tổng cộng</th>
+                        <td>${totalInvoice}</td>
+                        <td>${totalQuantity}</td>
+                        <f:formatNumber value="${totalPrice}" var="price" type="currency" currencyCode="VND"/>
+                        <td>${price}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

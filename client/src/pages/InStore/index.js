@@ -46,16 +46,30 @@ const InStore = () => {
 
     return (
         <>
-            <Row className="gap-5">
+            <h1 className={cx('heading')}>Hân hạnh được phục vụ quý khách, xin mời chọn món!</h1>
+
+            <Row className="my-5 gap-5">
                 <Col>
                     <Monitor cart={cart} handleClearCart={handleClearCart} handleUpdateCart={handleUpdateCart} />
                 </Col>
-                <Col md={6}>
+                <Col>
+                    <Row>
+                        {products.length > 0 &&
+                            products.map((product) => {
+                                return (
+                                    <Col md={6} key={product.id}>
+                                        <PostItem key={product.id} cart={cart} data={product} />;
+                                    </Col>
+                                );
+                            })}
+                    </Row>
+                </Col>
+                {/* <Col md={6}>
                     {products.length > 0 &&
                         products.map((product) => {
                             return <PostItem key={product.id} cart={cart} data={product} />;
                         })}
-                </Col>
+                </Col> */}
             </Row>
         </>
     );

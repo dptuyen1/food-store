@@ -43,6 +43,7 @@ const UserReview = ({ productId, setReviews }) => {
                                 placeholder="Góp ý cho chúng tôi thông qua trải nghiệm của bạn về sản phẩm..."
                                 value={content}
                                 onChange={(e) => setContent(e.target.value)}
+                                required
                             />
                         </Form.Group>
                         <Button variant="success" type="submit" className="" style={{ fontSize: '1.6rem' }}>

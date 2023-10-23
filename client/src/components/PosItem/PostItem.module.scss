@@ -1,10 +1,10 @@
 .wrapper {
+    min-height: 150px;
     background-color: var(--secondary);
-    padding: 10px 20px;
+    padding: 16px 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: var(--box-shadow);
-    margin-bottom: 20px;
 
     &:hover {
         cursor: pointer;

@@ -55,7 +55,7 @@ CREATE TABLE `coupon` (
   `value` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idcoupon_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,7 +87,7 @@ CREATE TABLE `details` (
   KEY `fk_details_product1_idx` (`product_id`),
   CONSTRAINT `fk_details_invoice1` FOREIGN KEY (`invoice_id`) REFERENCES `invoice` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_details_product1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `details` (
 
 LOCK TABLES `details` WRITE;
 /*!40000 ALTER TABLE `details` DISABLE KEYS */;
-INSERT INTO `details` VALUES (54,57500.00,1,3,29),(55,28000.00,1,15,29),(56,15000.00,1,25,29),(57,67500.00,1,4,30),(58,37500.00,1,13,30),(59,15000.00,1,24,30),(60,28000.00,4,12,31),(61,79000.00,2,20,31),(62,15000.00,2,24,31),(63,82000.00,1,1,32),(64,28000.00,1,12,32),(65,180000.00,1,18,32);
+INSERT INTO `details` VALUES (1,73500.00,1,5,1),(2,79000.00,1,20,1),(3,24500.00,1,7,2),(4,38000.00,1,11,2),(5,15000.00,1,24,2),(6,10000.00,1,21,3),(7,5000.00,1,23,3),(8,15000.00,1,25,3),(9,28000.00,1,15,4),(10,57500.00,2,3,5),(11,180000.00,1,18,5),(12,99000.00,1,19,5),(13,24500.00,1,7,6),(14,35000.00,1,14,6),(15,99000.00,1,19,6),(16,67500.00,2,4,7),(17,24500.00,1,9,7),(18,15000.00,1,25,7),(19,82000.00,1,1,8),(20,24500.00,1,8,8),(21,24500.00,1,9,8),(22,79000.00,1,20,8),(23,24500.00,2,9,9),(24,28000.00,2,12,9),(25,35000.00,1,14,9),(26,10000.00,1,21,9),(27,28000.00,1,12,10),(28,161000.00,1,17,10),(29,15000.00,3,24,10);
 /*!40000 ALTER TABLE `details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,7 +127,7 @@ CREATE TABLE `invoice` (
   CONSTRAINT `fk_invoice_shopping1` FOREIGN KEY (`shopping_id`) REFERENCES `shopping` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_invoice_status1` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_invoice_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,7 +136,7 @@ CREATE TABLE `invoice` (
 
 LOCK TABLES `invoice` WRITE;
 /*!40000 ALTER TABLE `invoice` DISABLE KEYS */;
-INSERT INTO `invoice` VALUES (29,100500.00,3,0.00,'2023-10-20 20:11:20',2,2,1,3),(30,120000.00,3,0.00,'2023-10-20 20:12:00',2,2,2,3),(31,270000.00,8,30000.00,'2023-10-20 20:14:12',2,2,2,4),(32,290000.00,3,0.00,'2023-10-20 20:16:08',2,1,1,2);
+INSERT INTO `invoice` VALUES (1,137250.00,2,15250.00,'2023-10-24 00:28:03',2,2,1,3),(2,69750.00,3,7750.00,'2022-10-24 00:28:38',2,2,2,3),(3,30000.00,3,0.00,'2021-11-24 00:28:59',2,2,1,3),(4,25200.00,1,2800.00,'2020-07-24 00:29:16',2,2,1,3),(5,394000.00,4,0.00,'2020-10-24 00:29:58',2,2,2,3),(6,158500.00,3,0.00,'2019-10-24 00:30:35',2,1,1,2),(7,174500.00,4,0.00,'2019-10-24 00:30:46',2,1,1,2),(8,210000.00,4,0.00,'2023-08-24 00:30:56',2,1,1,2),(9,150000.00,6,0.00,'2021-02-24 00:31:16',2,1,1,2),(10,234000.00,5,0.00,'2023-05-24 00:32:30',2,1,1,2);
 /*!40000 ALTER TABLE `invoice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,7 +215,7 @@ CREATE TABLE `promotion` (
   KEY `fk_promotion_coupon1_idx` (`coupon_id`),
   CONSTRAINT `fk_promotion_coupon1` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_promotion_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -224,7 +224,7 @@ CREATE TABLE `promotion` (
 
 LOCK TABLES `promotion` WRITE;
 /*!40000 ALTER TABLE `promotion` DISABLE KEYS */;
-INSERT INTO `promotion` VALUES (2,'2023-10-20 20:13:08','2023-11-20 20:13:08',4,1);
+INSERT INTO `promotion` VALUES (1,'2023-10-24 00:26:04','2023-11-24 00:26:04',3,1);
 /*!40000 ALTER TABLE `promotion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,7 +248,7 @@ CREATE TABLE `review` (
   KEY `fk_review_product1_idx` (`product_id`),
   CONSTRAINT `fk_review_product1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_review_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -257,7 +257,6 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
-INSERT INTO `review` VALUES (2,'Ngon','2023-10-20 20:14:40',NULL,4,1),(3,'Rất ngon!','2023-10-20 20:14:50',NULL,4,17);
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -360,7 +359,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `username_UNIQUE` (`username`),
   KEY `fk_user_role_idx` (`role_id`),
   CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -369,7 +368,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Tuyền','Đặng','dptuyen1@gmail.com','157/20 Phạm Văn Chiêu, phường 14, quận Gò Vấp','0932012306','admin','$2a$12$zx98MTNJesWJIqj3EOZx4.cAVHX6/MmHTpApTbCNYCGy/IXtbc/KW','https://res.cloudinary.com/dzbcst18v/image/upload/v1697432282/food-store/de4lcqdcsuc7kltij8kd.png','2023-10-04 12:12:19',1),(2,'Tuyền','Đặng','dptuyen1@gmail.com','157/20 Phạm Văn Chiêu, phường 14, quận Gò Vấp','0932012306','staff','$2a$12$zx98MTNJesWJIqj3EOZx4.cAVHX6/MmHTpApTbCNYCGy/IXtbc/KW','https://res.cloudinary.com/dzbcst18v/image/upload/v1697432282/food-store/o8mojndh7jusgo5c2yz6.png','2023-10-20 00:38:15',2),(3,'Tuyền','Đặng','dptuyen1@gmail.com','157/20 Phạm Văn Chiêu, phường 14, quận Gò Vấp','0932012306','customer','$2a$10$xjqiFNfq5BR.soKZb9TUJuCmwpXfhGPelrKPXNYP/RdlUAJ7cqVP6','https://res.cloudinary.com/dzbcst18v/image/upload/v1697432282/food-store/dx5prvnb76hb3okxj1xl.png','2023-10-20 09:00:47',3),(4,'Tuyền','Đặng','dptuyen1@gmail.com','Gò Vấp','0932012306','customer1','$2a$10$cHEecfdxDgjUV6OJTgSlmePtaM9OiIvZfjoOEykV4i4iBUDDSfANu',NULL,'2023-10-20 20:13:08',3),(5,'Tuyền','Đặng','dptuyen1@gmail.com','Gò Vấp','0932012306','staff1','$2a$10$jLtkCYxsmmPH3XL2ogXaI.beLrSdmlHRFD6u1WsZgAUaTd1XYNXgS',NULL,'2023-10-20 20:19:17',2);
+INSERT INTO `user` VALUES (1,'Tuyền','Đặng','dptuyen1@gmail.com','157/20 Phạm Văn Chiêu, phường 14, quận Gò Vấp','0932012306','admin','$2a$12$zx98MTNJesWJIqj3EOZx4.cAVHX6/MmHTpApTbCNYCGy/IXtbc/KW','https://res.cloudinary.com/dzbcst18v/image/upload/v1697432282/food-store/de4lcqdcsuc7kltij8kd.png','2023-10-04 12:12:19',1),(2,'Tuyền','Đặng','dptuyen1@gmail.com','157/20 Phạm Văn Chiêu, phường 14, quận Gò Vấp','0932012306','staff','$2a$12$zx98MTNJesWJIqj3EOZx4.cAVHX6/MmHTpApTbCNYCGy/IXtbc/KW','https://res.cloudinary.com/dzbcst18v/image/upload/v1697432282/food-store/o8mojndh7jusgo5c2yz6.png','2023-10-20 00:38:15',2),(3,'Tuyền','Đặng','dptuyen1@gmail.com','157/20 Phạm Văn Chiêu, phường 14, quận Gò Vấp','0932012306','customer','$2a$10$xjqiFNfq5BR.soKZb9TUJuCmwpXfhGPelrKPXNYP/RdlUAJ7cqVP6','https://res.cloudinary.com/dzbcst18v/image/upload/v1697432282/food-store/dx5prvnb76hb3okxj1xl.png','2023-10-20 09:00:47',3);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -382,4 +381,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-20 20:47:39
+-- Dump completed on 2023-10-24  1:38:19

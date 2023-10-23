@@ -21,4 +21,6 @@ public interface ProductRepository {
     Product addOrUpdate(Product product);
 
     int delete(Product product);
+
+    Long count();
 }

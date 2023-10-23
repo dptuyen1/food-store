@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -42,11 +43,11 @@ public class Coupon implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 45)
+    @Size(min = 1, max = 45, message = "{field.size}")
     @Column(name = "code")
     private String code;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "value")
+    @NotNull(message = "{field.size}")
     private BigDecimal value;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "couponId")
     private Set<Promotion> promotionSet;

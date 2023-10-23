@@ -52,8 +52,11 @@
                     <td>
                         <c:url value="/api/invoices/${invoice.id}" var="api"/>
                         <c:if test="${invoice.statusId.id == 1}">
-                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmOrder('${api}', '${user.id}')">
+                            <button type="button" class="btn btn-primary btn-sm" onclick="handleOrder(2, '${api}', '${user.id}')">
                                 Xác nhận đơn
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="handleOrder(3, '${api}', '${user.id}')">
+                                Hủy đơn
                             </button>
                         </c:if>
                     </td>
@@ -69,14 +72,14 @@
         refresh();
     };
 
-    const confirmOrder = (path, userId) => {
+    const handleOrder = (statusId, path, userId) => {
         fetch(path, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                statusId: 2,
+                statusId: statusId,
                 userId: userId
             })
         }).then(res => {

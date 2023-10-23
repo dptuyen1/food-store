@@ -51,7 +51,7 @@
         <put-attribute name="content"
                        value="/WEB-INF/pages/user/login.jsp" />
     </definition>
-    <definition name="payment" extends="baseLayout">
+    <!--    <definition name="payment" extends="baseLayout">
         <put-attribute name="title" value="Phương thức thanh toán" />
         <put-attribute name="content"
                        value="/WEB-INF/pages/payment/index.jsp" />
@@ -60,7 +60,7 @@
         <put-attribute name="title" value="Tùy chỉnh phương thức thanh toán" />
         <put-attribute name="content"
                        value="/WEB-INF/pages/payment/details.jsp" />
-    </definition>
+    </definition>-->
     <definition name="coupon" extends="baseLayout">
         <put-attribute name="title" value="Ưu đãi khách hàng" />
         <put-attribute name="content"
@@ -81,7 +81,7 @@
         <put-attribute name="content"
                        value="/WEB-INF/pages/role/details.jsp" />
     </definition>
-    <definition name="shopping" extends="baseLayout">
+    <!--    <definition name="shopping" extends="baseLayout">
         <put-attribute name="title" value="Phương thức phục vụ" />
         <put-attribute name="content"
                        value="/WEB-INF/pages/shopping/index.jsp" />
@@ -100,7 +100,7 @@
         <put-attribute name="title" value="Tùy chỉnh trạng thái đơn hàng" />
         <put-attribute name="content"
                        value="/WEB-INF/pages/status/details.jsp" />
-    </definition>
+    </definition>-->
     <definition name="pos" extends="baseLayout">
         <put-attribute name="title" value="Trang bán hàng" />
         <put-attribute name="content"

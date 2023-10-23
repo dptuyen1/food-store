@@ -36,7 +36,7 @@ public class IndexController {
     private InvoiceService invoiceSerivce;
 
     @RequestMapping("/")
-    public String index(@RequestParam Map<String, String> params, Model model) {
+    public String index(Model model, @RequestParam Map<String, String> params) {
         List<Integer> years = this.statsService.getYears();
         List<Object> invoices = this.statsService.invoiceStats(params);
         List<Object> products = this.statsService.productStats(params);

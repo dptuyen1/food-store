@@ -28,7 +28,7 @@
                             <a href="<c:url value="/categories" />" class="nav-link px-2 text-dark link-primary">Danh mục</a>
                             <a href="<c:url value="/products" />" class="nav-link px-2 text-dark link-primary">Sản phẩm</a>
                             <a href="<c:url value="/coupons" />" class="nav-link px-2 text-dark link-primary">Ưu đãi</a>
-                            <a href="<c:url value="/shopping" />" class="nav-link px-2 text-dark link-primary">Phương thức phục vụ</a>
+                            <!--<a href="<c:url value="/shopping" />" class="nav-link px-2 text-dark link-primary">Phương thức phục vụ</a>-->
                             <a href="<c:url value="/users" />" class="nav-link px-2 text-dark link-primary">Người dùng</a>
                             <a href="<c:url value="/roles" />" class="nav-link px-2 text-dark link-primary">Quyền người dùng</a>
                         </div>

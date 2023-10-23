@@ -1,4 +1,5 @@
 import config from '~/configs';
+import { SubLayout } from '~/layouts';
 import Cart from '~/pages/Cart';
 import Details from '~/pages/Details';
 
@@ -14,7 +15,7 @@ const publicRoutes = [
     { path: config.routes.login, component: Login },
     { path: config.routes.register, component: Register },
     { path: config.routes.details, component: Details },
-    { path: config.routes['in-store'], component: InStore },
+    { path: config.routes['in-store'], component: InStore, layout: SubLayout },
 ];
 
 const privateRoutes = [

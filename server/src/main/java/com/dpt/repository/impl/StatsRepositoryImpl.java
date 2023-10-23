@@ -57,17 +57,24 @@ public class StatsRepositoryImpl implements StatsRepository {
 
         criteriaQuery.multiselect(year, criteriaBuilder.count(year), criteriaBuilder.sum(invoice.get("totalQuantity")), criteriaBuilder.sum(invoice.get("totalPrice")));
 
+        List<Predicate> predicates = new ArrayList<>();
+
         if (params != null && !params.isEmpty()) {
+
             String month = params.get("month");
             if (month != null && !month.isEmpty()) {
-                criteriaQuery.where(criteriaBuilder.equal(criteriaBuilder.function("MONTH", Integer.class, invoice.get("createdDate")), Integer.valueOf(month)));
+                predicates.add(criteriaBuilder.equal(criteriaBuilder.function("MONTH", Integer.class, invoice.get("createdDate")), Integer.valueOf(month)));
             }
 
             String quarter = params.get("quarter");
             if (quarter != null && !quarter.isEmpty()) {
-                criteriaQuery.where(criteriaBuilder.equal(criteriaBuilder.function("QUARTER", Integer.class, invoice.get("createdDate")), Integer.valueOf(quarter)));
+                predicates.add(criteriaBuilder.equal(criteriaBuilder.function("QUARTER", Integer.class, invoice.get("createdDate")), Integer.valueOf(quarter)));
             }
         }
+
+        predicates.add(criteriaBuilder.equal(invoice.get("statusId"), 2));
+
+        criteriaQuery.where(predicates.toArray(Predicate[]::new));
 
         criteriaQuery.groupBy(year);
         criteriaQuery.orderBy(criteriaBuilder.desc(year));
@@ -94,8 +101,9 @@ public class StatsRepositoryImpl implements StatsRepository {
 
         criteriaQuery.multiselect(product.get("name"), sum);
 
+        List<Predicate> predicates = new ArrayList<>();
+
         if (params != null && !params.isEmpty()) {
-            List<Predicate> predicates = new ArrayList<>();
 
             String year = params.get("year");
             if (year != null && !year.isEmpty()) {
@@ -122,8 +130,11 @@ public class StatsRepositoryImpl implements StatsRepository {
             }
 
 //            criteriaQuery.where(criteriaBuilder.equal(invoice.get("id"), details.get("invoiceId")));
-            criteriaQuery.where(predicates.toArray(Predicate[]::new));
         }
+
+        predicates.add(criteriaBuilder.equal(invoice.get("statusId"), 2));
+
+        criteriaQuery.where(predicates.toArray(Predicate[]::new));
 
 //        criteriaQuery.where(criteriaBuilder.equal(product.get("id"), details.get("productId")));
         criteriaQuery.groupBy(product.get("id"));

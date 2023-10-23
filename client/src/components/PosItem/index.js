@@ -40,8 +40,8 @@ const PostItem = ({ data, cart }) => {
                     <Col>
                         <Image src={data.image} alt="product-img" width={100} />
                     </Col>
-                    <Col md={9}>
-                        <h2>{data.name}</h2>
+                    <Col>
+                        <h3>{data.name}</h3>
                         <h3 className={cx('price')}>
                             {data.price.toLocaleString('vi-VN', {
                                 style: 'currency',

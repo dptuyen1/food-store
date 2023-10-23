@@ -10,6 +10,8 @@ import com.dpt.service.ProductService;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author dptuy
  */
 @Controller
+@PropertySource("classpath:configs.properties")
 public class ProductController {
 
     @Autowired
@@ -32,9 +35,17 @@ public class ProductController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private Environment env;
+
     @GetMapping("/products")
     public String index(Model model, @RequestParam Map<String, String> params) {
+        int pageSize = Integer.parseInt(this.env.getProperty("page_size"));
+        long count = this.productService.count();
+
         model.addAttribute("products", this.productService.getProducts(params));
+        model.addAttribute("counter", Math.ceil(count * 1.0 / pageSize));
+
         return "product";
     }
 
@@ -52,7 +63,7 @@ public class ProductController {
                 return "redirect:/products";
             }
         }
-        model.addAttribute("msg", "Có lỗi xảy ra, vui lòng thử lại..." + result.toString());
+        model.addAttribute("msg", "Có lỗi xảy ra, vui lòng thử lại...");
         return "product-details";
     }
 

@@ -22,12 +22,15 @@
             <th scope="col">Giảm giá</th>
             <th scope="col">Tổng tiền</th>
             <th scope="col">Phục vụ</th>
+            <th scope="col">Trạng thái</th>
         </tr>
     </thead>
     <tbody>
         <c:set var="totalPrice" value="0" />
         <c:forEach items="${invoices}" var="invoice">
-            <c:set var="totalPrice" value="${totalPrice + invoice.totalPrice}" />
+            <c:if test="${invoice.statusId.name == 'STATUS_PAID'}">
+                <c:set var="totalPrice" value="${totalPrice + invoice.totalPrice}" />
+            </c:if>
             <tr>
                 <th scope="row">${invoice.id}</th>
                 <td>${invoice.createdDate}</td>
@@ -40,6 +43,17 @@
                     </c:when>
                     <c:otherwise>
                         <td>Trực tuyến</td>
+                    </c:otherwise>
+                </c:choose>
+                <c:choose>
+                    <c:when test="${invoice.statusId.name == 'STATUS_PENDING'}">
+                        <td>Chờ xác nhận</td>
+                    </c:when>
+                    <c:when test="${invoice.statusId.name == 'STATUS_PAID'}">
+                        <td>Đã thanh toán</td>
+                    </c:when>
+                    <c:otherwise>
+                        <td>Đã hủy</td>
                     </c:otherwise>
                 </c:choose>
             </tr>

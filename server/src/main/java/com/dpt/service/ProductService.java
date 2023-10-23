@@ -21,4 +21,6 @@ public interface ProductService {
     Product addOrUpdate(Product product);
 
     int delete(int id);
+
+    Long count();
 }

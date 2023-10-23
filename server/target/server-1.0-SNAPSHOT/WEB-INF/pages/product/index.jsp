@@ -29,37 +29,49 @@
         </tr>
     </thead>
     <tbody>
-    <c:forEach items="${products}" var="product">
-        <tr>
-            <th scope="row">${product.id}</th>
-            <td>${product.name}</td>
-            <td>${product.price} VND</td>
-            <td><img src="${product.image}" alt="product-image" width="50px"/></td>
-        <c:choose>
-            <c:when test="${product.active == true}">
-                <td>Hoạt động</td>
-            </c:when>
-            <c:otherwise>
-                <td>Ngừng hoạt động</td>
-            </c:otherwise>
-        </c:choose>
-        <td>${product.categoryId.name}</td>
-        <td>
-            <a href="/products/${product.id}" class="btn btn-warning btn-sm text-white">
-                <i class="fa-solid fa-pen"></i>
-            </a>
-        <c:url value="/api/products/${product.id}" var="api"/>
-<!--                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteProduct('${api}')">
-            <i class="fa-solid fa-trash"></i>
-        </button>-->
-        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <i class="fa-solid fa-trash"></i>
-        </button>
-        </td>
-        </tr>
-    </c:forEach>
-</tbody>
+        <c:forEach items="${products}" var="product">
+            <tr>
+                <th scope="row">${product.id}</th>
+                <td>${product.name}</td>
+                <td>${product.price} VND</td>
+                <td><img src="${product.image}" alt="product-image" width="50px"/></td>
+                    <c:choose>
+                        <c:when test="${product.active == true}">
+                        <td>Hoạt động</td>
+                    </c:when>
+                    <c:otherwise>
+                        <td>Ngừng hoạt động</td>
+                    </c:otherwise>
+                </c:choose>
+                <td>${product.categoryId.name}</td>
+                <td>
+                    <a href="/products/${product.id}" class="btn btn-warning btn-sm text-white">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <c:url value="/api/products/${product.id}" var="api"/>
+            <!--                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteProduct('${api}')">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>-->
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
 </table>
+
+<c:if test="${counter > 1}">
+    <ul class="pagination d-flex align-items-center justify-content-center">
+        <li class="page-item"><a class="page-link" href="<c:url value="/products"></c:url>">Tất cả</a></li>
+            <c:forEach begin="1" end="${counter}" var="i">
+                <c:url value="" var="pageAction">
+                    <c:param name="page" value="${i}" />
+                </c:url>
+            <li class="page-item"><a class="page-link" href="${pageAction}">${i}</a></li>
+            </c:forEach>
+    </ul>
+</c:if>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
