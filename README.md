@@ -86,4 +86,8 @@ customer - 123 (khách hàng)
 
 http://localhost:3000/ (đường dẫn đến giao diện mua hàng trực tuyến).
 
+![git-tutorial](https://res.cloudinary.com/dzbcst18v/image/upload/v1698113074/food-store/b6lfhiia10c5lvz68cgx.png)
+
 http://localhost:3000/in-store (đường dẫn đến giao diện mua hàng tại quán (pos)).
+
+![git-tutorial](https://res.cloudinary.com/dzbcst18v/image/upload/v1698113155/food-store/h5t5ukeyb85tprm97sdu.png)
