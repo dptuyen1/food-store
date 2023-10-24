@@ -58,7 +58,7 @@ const InStore = () => {
                             products.map((product) => {
                                 return (
                                     <Col md={6} key={product.id}>
-                                        <PostItem key={product.id} cart={cart} data={product} />;
+                                        <PostItem key={product.id} cart={cart} data={product} />
                                     </Col>
                                 );
                             })}

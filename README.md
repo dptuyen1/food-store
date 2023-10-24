@@ -83,3 +83,7 @@ customer - 123 (khách hàng)
 ```
 
 **Dùng tài khoản trên để đặt hàng trực tuyến, xem lịch sử mua hàng, bình luận sản phẩm...**
+
+http://localhost:3000/ (đường dẫn đến giao diện mua hàng trực tuyến).
+
+http://localhost:3000/in-store (đường dẫn đến giao diện mua hàng tại quán (pos)).
