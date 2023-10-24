@@ -58,7 +58,7 @@ Thiết lập thông số như sau:
 
 Server (**bắt buộc chạy đầu tiên**):
 
-Mở dự án trong folder <server> và nhấn vào nút run project (như hình) để chạy.
+Mở dự án trong folder <server> và nhấn vào nút run project (như hình) để chạy
 
 ![git-tutorial](https://res.cloudinary.com/dzbcst18v/image/upload/v1698111224/food-store/kc54ict4mx4y8crakipx.png)
 
@@ -74,7 +74,7 @@ staff - 123 (nhân viên)
 
 Client:
 
-Mở dự án trong folder <client> và gõ vào lệnh <npm start> (như hình) để chạy.
+Mở dự án trong folder <client> và gõ vào lệnh <npm start> (như hình) để chạy
 
 ![git-tutorial](https://res.cloudinary.com/dzbcst18v/image/upload/v1698111464/food-store/nf2axlylthjq4eiddisk.png)
 
@@ -84,10 +84,10 @@ customer - 123 (khách hàng)
 
 **Dùng tài khoản trên để đặt hàng trực tuyến, xem lịch sử mua hàng, bình luận sản phẩm...**
 
-http://localhost:3000/ (đường dẫn đến giao diện mua hàng trực tuyến).
+http://localhost:3000/ (đường dẫn đến giao diện mua hàng trực tuyến)
 
 ![git-tutorial](https://res.cloudinary.com/dzbcst18v/image/upload/v1698113074/food-store/b6lfhiia10c5lvz68cgx.png)
 
-http://localhost:3000/in-store (đường dẫn đến giao diện mua hàng tại quán (pos)).
+http://localhost:3000/in-store (đường dẫn đến giao diện mua hàng tại quán (pos))
 
 ![git-tutorial](https://res.cloudinary.com/dzbcst18v/image/upload/v1698113155/food-store/h5t5ukeyb85tprm97sdu.png)
