@@ -24,7 +24,7 @@ Có 2 cách
 
 C1. Windows Explorer:
 
-thư mục dự án (food-store) > server > src > main > resources > databases.properties
+Thư mục dự án (food-store) > server > src > main > resources > databases.properties
 
 ![git-tutorial](https://res.cloudinary.com/dzbcst18v/image/upload/v1698088708/food-store/sc1apq3pwytf1qjruijt.png)
 
@@ -58,7 +58,15 @@ Thiết lập thông số như sau:
 
 Server (**bắt buộc chạy đầu tiên**):
 
-Mở dự án trong folder <server> và nhấn vào nút run project (như hình) để chạy
+Mở dự án trong folder **"server"** và nhấn vào nút build project (như hình) để tải xuống những modules cần thiết
+
+![git-tutorial](https://res.cloudinary.com/dzbcst18v/image/upload/v1699541581/food-store/p4dmo0zqpvujskhkh7rz.png)
+
+Cho đến khi output hiện thông báo thành công như hình
+
+![git-tutorial](https://res.cloudinary.com/dzbcst18v/image/upload/v1699541845/food-store/fi8bkutormkmlplf30zn.png)
+
+Tiếp theo đó, nhấn vào nút run project (như hình) để chạy
 
 ![git-tutorial](https://res.cloudinary.com/dzbcst18v/image/upload/v1698111224/food-store/kc54ict4mx4y8crakipx.png)
 
@@ -74,7 +82,11 @@ staff - 123 (nhân viên)
 
 Client:
 
-Mở dự án trong folder <client> và gõ vào lệnh <npm start> (như hình) để chạy
+Mở dự án trong folder **"client"** và gõ vào lệnh **"npm i"** (như hình) để tải xuống những modules cần thiết
+
+![git-tutorial](https://res.cloudinary.com/dzbcst18v/image/upload/v1699542171/food-store/wis16kcp5suteznpyspz.png)
+
+Sau khi hiển thị thông báo tải xuống thành công những modules cần thiết, gõ tiếp lệnh **"npm start"** (như hình) để chạy
 
 ![git-tutorial](https://res.cloudinary.com/dzbcst18v/image/upload/v1698111464/food-store/nf2axlylthjq4eiddisk.png)
 
