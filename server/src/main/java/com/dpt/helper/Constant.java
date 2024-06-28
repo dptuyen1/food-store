@@ -10,13 +10,13 @@ package com.dpt.helper;
  */
 public class Constant {
 
-    public static final String accessKey = "M8brj9K6E22vXoDB",
-            serectKey = "nqQiVSgDMy809JoPF6OzP5OdBUB550Y4",
+    public static final String accessKey = your-access-key,
+            serectKey = your-secret-key,
             partnerCode = "MOMO5RGX20191128",
             orderType = "momo_wallet",
             requestType = "captureWallet",
             payType = "webApp",
-            redirectUrl = "http://localhost:3000/tracking",
-            ipnUrl = "http://localhost:3000/tracking",
+            redirectUrl = optional,
+            ipnUrl = optional,
             endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
 }
